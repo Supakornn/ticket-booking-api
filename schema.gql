@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Event {
+  id: Int!
+  title: String!
+  description: String!
+  date: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Booking {
+  id: Int!
+  user: User!
+  event: Event!
+}
+
+type User {
+  id: Int!
+  username: String!
+  email: String!
+  bookings: [Booking!]
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User
+  events: [Event!]!
+  event(id: Int!): Event
+  bookings: [Booking!]!
+  booking(id: Int!): Booking!
+}
+
+type Mutation {
+  register(registerDto: RegisterDto!): User!
+  login(loginDto: LoginDto!): String!
+  createEvent(input: CreateEventInput!): Event!
+  createBooking(input: CreateBookingInput!): Booking!
+}
+
+input RegisterDto {
+  username: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+input CreateEventInput {
+  title: String!
+  description: String
+  date: String!
+}
+
+input CreateBookingInput {
+  userId: Int!
+  eventId: Int!
+}
